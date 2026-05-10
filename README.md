@@ -2,7 +2,7 @@
 
 Titlu: Site web destinat vânzării produselor alimentare
 
-link video:https://youtu.be/B82i1ZkvFQQ
+link video:https://youtu.be/tmvCCiI0DmQ
 link publicare:https://online-shop-ase-2026-ekfxbvbmetc3bqbn.swedencentral-01.azurewebsites.net/
 
 Nume și prenume: BOERESCU JULIA-MARIA
