@@ -1,14 +1,42 @@
-- name: npm install and build
-  run: |
-    npm install
-    npm run build
-  env:
-    MONGODB_URI: ${{ secrets.MONGODB_URI }}
-    MONGODB_DB: ${{ secrets.MONGODB_DB }}
-    JWT_SECRET: ${{ secrets.JWT_SECRET }}
-    ACS_EMAIL_CONNECTION_STRING: ${{ secrets.ACS_EMAIL_CONNECTION_STRING }}
-    ACS_EMAIL_SENDER: ${{ secrets.ACS_EMAIL_SENDER }}
-    ADMIN_EMAIL: ${{ secrets.ADMIN_EMAIL }}
-    AZURE_STORAGE_CONNECTION_STRING: ${{ secrets.AZURE_STORAGE_CONNECTION_STRING }}
-    AZURE_STORAGE_CONTAINER: ${{ secrets.AZURE_STORAGE_CONTAINER }}
-    NEXT_PUBLIC_APP_NAME: ${{ secrets.NEXT_PUBLIC_APP_NAME }}
+name: Deploy Next.js app to Azure Web App
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22.x'
+
+      - name: npm install and build
+        run: |
+          npm install
+          npm run build
+        env:
+          MONGODB_URI: ${{ secrets.MONGODB_URI }}
+          MONGODB_DB: ${{ secrets.MONGODB_DB }}
+          JWT_SECRET: ${{ secrets.JWT_SECRET }}
+          ACS_EMAIL_CONNECTION_STRING: ${{ secrets.ACS_EMAIL_CONNECTION_STRING }}
+          ACS_EMAIL_SENDER: ${{ secrets.ACS_EMAIL_SENDER }}
+          ADMIN_EMAIL: ${{ secrets.ADMIN_EMAIL }}
+          AZURE_STORAGE_CONNECTION_STRING: ${{ secrets.AZURE_STORAGE_CONNECTION_STRING }}
+          AZURE_STORAGE_CONTAINER: ${{ secrets.AZURE_STORAGE_CONTAINER }}
+          NEXT_PUBLIC_APP_NAME: ${{ secrets.NEXT_PUBLIC_APP_NAME }}
+
+      - name: Deploy to Azure Web App
+        uses: azure/webapps-deploy@v3
+        with:
+          app-name: online-shop-2026
+          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+          package: .
