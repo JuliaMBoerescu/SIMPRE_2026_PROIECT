@@ -1,0 +1,23 @@
+{
+  "name": "azure-food-shop",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start -p ${PORT:-3000}",
+    "seed": "node scripts/seed.js"
+  },
+  "dependencies": {
+    "@azure/communication-email": "latest",
+    "@azure/storage-blob": "latest",
+    "bcryptjs": "latest",
+    "jsonwebtoken": "latest",
+    "mongodb": "latest",
+    "next": "latest",
+    "react": "latest",
+    "react-dom": "latest",
+    "dotenv": "latest"
+  },
+  "devDependencies": {}
+}
