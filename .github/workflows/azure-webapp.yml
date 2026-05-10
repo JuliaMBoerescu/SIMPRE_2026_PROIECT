@@ -19,7 +19,7 @@ jobs:
         with:
           node-version: '22.x'
 
-      - name: npm install and build
+      - name: Install dependencies and build
         run: |
           npm install
           npm run build
@@ -37,6 +37,6 @@ jobs:
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v3
         with:
-          app-name: online-shop-2026
+          app-name: online-shop-ase-2026
           publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
           package: .
